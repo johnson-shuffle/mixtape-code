@@ -1,0 +1,8 @@
+*.RData
+*.Rda
+*.Rhistory
+*.Rprofile
+*.Rproj.user
+*.Ruserdata
+*.DS_Store
+/mixtape_cache
