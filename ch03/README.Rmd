@@ -1,5 +1,6 @@
 ---
-title: "Properties of regression"
+title:
+author:
 date:
 always_allow_html: yes
 output:
@@ -9,6 +10,8 @@ output:
 editor_options: 
   chunk_output_type: console
 ---
+
+% Properties of regression
 
 ```{r setup, echo = F, message = F}
 knitr::opts_chunk$set(

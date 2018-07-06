@@ -3,6 +3,8 @@
 -   [Expected value of OLS](#expected-value-of-ols)
 -   [Regression anatomy](#regression-anatomy)
 
+% Properties of regression
+
 OLS regression line
 -------------------
 
