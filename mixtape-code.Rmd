@@ -4,7 +4,7 @@ author: "Jake Johnson"
 date:
 always_allow_html: yes
 output:
-  github_document:
+  md_document:
     toc: true
     toc_depth: 2
 editor_options: 
