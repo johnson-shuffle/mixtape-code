@@ -131,6 +131,7 @@ knitr::kable(
   kableExtra::row_spec(9, bold = T) %>%
   kableExtra::kable_styling()
 ```
+<br>
 
 ## Qualitative change in sign
 
