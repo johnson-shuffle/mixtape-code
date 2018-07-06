@@ -1,9 +1,10 @@
 ---
 title: "Code for Causal Inference - The Mixtape"
 author: "Jake Johnson"
-date: 
-output: 
-  html_document:
+date:
+always_allow_html: yes
+output:
+  github_document:
     toc: true
     toc_depth: 2
 editor_options: 
@@ -482,3 +483,5 @@ dat %<>% mutate(
 reg <- lm(dpaup ~ dout + dold + dpop, data = filter(dat, Type > 1))
 reg
 ```
+
+## Simple difference in means decomposition
