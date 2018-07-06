@@ -3,7 +3,7 @@
     decomposition](#simple-difference-in-means-decomposition)
 
 Yule (1899)
-===========
+-----------
 
     # reshape yule to long
     pat <- '(^[A-z]+[65]*)(\\d{2,4})(_\\d|O|I)*'
@@ -76,4 +76,4 @@ Yule (1899)
     ##    81.39195      0.31246     -0.03133     -0.22418
 
 Simple difference in means decomposition
-========================================
+----------------------------------------

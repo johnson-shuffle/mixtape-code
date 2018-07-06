@@ -4,7 +4,7 @@
 -   [Nonrandom sample selection](#nonrandom-sample-selection)
 
 Gender disparities controlling for occupation
-=============================================
+---------------------------------------------
 
     library(ggraph)
     library(tidygraph)
@@ -249,7 +249,7 @@ N
 </tbody>
 </table>
 Qualitative change in sign
-==========================
+--------------------------
 
     library(sandwich)
     library(lmtest)
@@ -437,7 +437,7 @@ N
 </tbody>
 </table>
 Nonrandom sample selection
-==========================
+--------------------------
 
     set.seed(3444)
 

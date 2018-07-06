@@ -4,7 +4,7 @@
 -   [Regression anatomy](#regression-anatomy)
 
 OLS regression line
-===================
+-------------------
 
     set.seed(1)
 
@@ -49,7 +49,7 @@ OLS regression line
 ![](../fig/ols_line-2.png)
 
 Algebraic properties of OLS
-===========================
+---------------------------
 
     set.seed(1234)
 
@@ -76,10 +76,10 @@ Algebraic properties of OLS
     out %<>% cbind(tibble(no = c(1:10, 'Sum')), .)
     names(out) <- c(
       names(out)[1:4],
-      '$\\mathbf{\\hat y}$',
-      '$\\mathbf{\\hat u}$',
-      '$\\mathbf{\\hat x \\hat u}$',
-      '$\\mathbf{\\hat y \\hat u}$'
+      '$\\hat y$',
+      '$\\hat u$',
+      '$\\hat x \\hat u$',
+      '$\\hat y \\hat u$'
       )
 
     knitr::kable(
@@ -108,16 +108,16 @@ u
 y
 </th>
 <th style="text-align:center;">
-**ŷ**
+*ŷ*
 </th>
 <th style="text-align:center;">
-**û**
+*û*
 </th>
 <th style="text-align:center;">
-**x̂****û**
+*x̂**û*
 </th>
 <th style="text-align:center;">
-**ŷ****û**
+*ŷ**û*
 </th>
 </tr>
 </thead>
@@ -411,7 +411,7 @@ Sum
 </tbody>
 </table>
 Expected value of OLS
-=====================
+---------------------
 
     # ols function
     ols <- function(...) {
@@ -443,7 +443,7 @@ Expected value of OLS
 ![](../fig/ols_value-1.png)
 
 Regression anatomy
-==================
+------------------
 
     # auto dataset
     # dat <- read_dta('/Applications/Stata/auto.dta')

@@ -22,7 +22,7 @@ load_tidy()
 library(mixtape)
 ```
 
-# Yule (1899)
+## Yule (1899)
 
 ```{r yule}
 
@@ -88,4 +88,4 @@ reg <- lm(dpaup ~ dout + dold + dpop, data = filter(dat, Type > 1))
 reg
 ```
 
-# Simple difference in means decomposition
+## Simple difference in means decomposition

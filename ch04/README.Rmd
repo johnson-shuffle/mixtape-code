@@ -22,7 +22,7 @@ load_tidy()
 library(mixtape)
 ```
 
-# Gender disparities controlling for occupation
+## Gender disparities controlling for occupation
 
 ```{r gender}
 
@@ -132,7 +132,7 @@ knitr::kable(
   kableExtra::kable_styling()
 ```
 
-# Qualitative change in sign
+## Qualitative change in sign
 
 ```{r qual_change}
 
@@ -211,7 +211,7 @@ knitr::kable(
   kableExtra::kable_styling()
 ```
 
-# Nonrandom sample selection
+## Nonrandom sample selection
 
 ```{r nonrandom}
 

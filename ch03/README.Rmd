@@ -22,7 +22,7 @@ load_tidy()
 library(mixtape)
 ```
 
-# OLS regression line
+## OLS regression line
 
 ```{r ols_line}
 
@@ -63,7 +63,7 @@ ggplot(dat, aes(yhat1, uhat1)) +
   ggthemes::theme_tufte()
 ```
 
-# Algebraic properties of OLS
+## Algebraic properties of OLS
 
 ```{r ols_prop}
 
@@ -92,10 +92,10 @@ out <- rbind(dat, colSums(dat))
 out %<>% cbind(tibble(no = c(1:10, 'Sum')), .)
 names(out) <- c(
   names(out)[1:4],
-  '$\\mathbf{\\hat y}$',
-  '$\\mathbf{\\hat u}$',
-  '$\\mathbf{\\hat x \\hat u}$',
-  '$\\mathbf{\\hat y \\hat u}$'
+  '$\\hat y$',
+  '$\\hat u$',
+  '$\\hat x \\hat u$',
+  '$\\hat y \\hat u$'
   )
 
 knitr::kable(
@@ -109,7 +109,7 @@ knitr::kable(
   kableExtra::kable_styling()
 ```
 
-# Expected value of OLS
+## Expected value of OLS
 
 ```{r ols_value}
 
@@ -133,7 +133,7 @@ ggplot(tibble(x = beta)) +
   ggthemes::theme_tufte()
 ```
 
-# Regression anatomy
+## Regression anatomy
 
 ```{r ols_anatomy}
 

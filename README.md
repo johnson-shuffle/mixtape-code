@@ -9,8 +9,11 @@ Cunningham.
 
 ## Chapters
 
-  - Properties of regression
+  - [Properties of
+    regression](https://github.com/johnson-shuffle/mixtape-code/tree/master/ch03)
 
-  - Directed acyclical graphs
+  - [Directed acyclical
+    graphs](https://github.com/johnson-shuffle/mixtape-code/tree/master/ch04)
 
-  - Potential outcomes causal model
+  - [Potential outcomes causal
+    model](https://github.com/johnson-shuffle/mixtape-code/tree/master/ch05)
