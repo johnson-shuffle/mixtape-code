@@ -108,6 +108,7 @@ knitr::kable(
   kableExtra::row_spec(11, bold = T) %>%
   kableExtra::kable_styling()
 ```
+<br>
 
 ## Expected value of OLS
 

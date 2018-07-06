@@ -410,6 +410,8 @@ Sum
 </tr>
 </tbody>
 </table>
+<br>
+
 Expected value of OLS
 ---------------------
 

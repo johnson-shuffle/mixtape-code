@@ -210,6 +210,7 @@ knitr::kable(
   kableExtra::row_spec(7, bold = T) %>%
   kableExtra::kable_styling()
 ```
+<br>
 
 ## Nonrandom sample selection
 

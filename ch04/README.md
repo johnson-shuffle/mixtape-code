@@ -436,6 +436,8 @@ N
 </tr>
 </tbody>
 </table>
+<br>
+
 Nonrandom sample selection
 --------------------------
 
