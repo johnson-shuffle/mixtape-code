@@ -581,6 +581,8 @@ Constant
 </td>
 </tr>
 </table>
+<br>
+
 Nonrandom sample selection
 --------------------------
 
