@@ -167,7 +167,23 @@ STAR Experiment
     reg <- map(mod, ~felm(as.formula(.), data = dat))
 
     # figure 8
-    stargazer::stargazer(reg, type = 'html')
+    vars <- c(
+      'Small class',
+      'Regular/aide class',
+      'White',
+      'Boy',
+      'Free lunch',
+      'Teacher experience'
+      )
+    stargazer(
+      reg,
+      #column.labels = labs,
+      covariate.labels = vars,
+      notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
+      notes.append = F,
+      star.char = c("@", "@@", "@@@"),
+      type = 'html'
+      )
 
 <table style="text-align:center">
 <tr>
@@ -216,19 +232,19 @@ STAR Experiment
 </tr>
 <tr>
 <td style="text-align:left">
-sck
+Small class
 </td>
 <td>
-13.899<sup>\*\*\*</sup>
+13.899<sup>@@@</sup>
 </td>
 <td>
-16.022<sup>\*\*\*</sup>
+16.022<sup>@@@</sup>
 </td>
 <td>
-15.977<sup>\*\*\*</sup>
+15.977<sup>@@@</sup>
 </td>
 <td>
-16.014<sup>\*\*\*</sup>
+16.014<sup>@@@</sup>
 </td>
 </tr>
 <tr>
@@ -261,7 +277,7 @@ sck
 </tr>
 <tr>
 <td style="text-align:left">
-rak
+Regular/aide class
 </td>
 <td>
 0.314
@@ -306,14 +322,14 @@ rak
 </tr>
 <tr>
 <td style="text-align:left">
-white
+White
 </td>
 <td>
 </td>
 <td>
 </td>
 <td>
-23.986<sup>\*\*\*</sup>
+23.986<sup>@@@</sup>
 </td>
 <td>
 </td>
@@ -345,14 +361,14 @@ white
 </tr>
 <tr>
 <td style="text-align:left">
-boy
+Boy
 </td>
 <td>
 </td>
 <td>
 </td>
 <td>
--12.161<sup>\*\*\*</sup>
+-12.161<sup>@@@</sup>
 </td>
 <td>
 </td>
@@ -384,17 +400,17 @@ boy
 </tr>
 <tr>
 <td style="text-align:left">
-freelunk
+Free lunch
 </td>
 <td>
 </td>
 <td>
 </td>
 <td>
--35.022<sup>\*\*\*</sup>
+-35.022<sup>@@@</sup>
 </td>
 <td>
--37.279<sup>\*\*\*</sup>
+-37.279<sup>@@@</sup>
 </td>
 </tr>
 <tr>
@@ -425,7 +441,7 @@ freelunk
 </tr>
 <tr>
 <td style="text-align:left">
-totexpk
+Teacher experience
 </td>
 <td>
 </td>
@@ -434,7 +450,7 @@ totexpk
 <td>
 </td>
 <td>
-0.680<sup>\*\*\*</sup>
+0.680<sup>@@@</sup>
 </td>
 </tr>
 <tr>
@@ -467,7 +483,7 @@ totexpk
 Constant
 </td>
 <td>
-918.043<sup>\*\*\*</sup>
+918.043<sup>@@@</sup>
 </td>
 <td>
 </td>
@@ -582,7 +598,7 @@ Residual Std. Error
 <em>Note:</em>
 </td>
 <td colspan="4" style="text-align:right">
-<sup>*</sup>p&lt;0.1; <sup>**</sup>p&lt;0.05; <sup>***</sup>p&lt;0.01
+@ p &lt; 0.10, @@ p &lt; 0.05, @@@ p &lt; 0.01
 </td>
 </tr>
 </table>

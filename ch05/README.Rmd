@@ -148,7 +148,23 @@ mod <- 'tscorek ~ sck + rak' %>%
 reg <- map(mod, ~felm(as.formula(.), data = dat))
 
 # figure 8
-stargazer::stargazer(reg, type = 'html')
+vars <- c(
+  'Small class',
+  'Regular/aide class',
+  'White',
+  'Boy',
+  'Free lunch',
+  'Teacher experience'
+  )
+stargazer(
+  reg,
+  #column.labels = labs,
+  covariate.labels = vars,
+  notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
+  notes.append = F,
+  star.char = c("@", "@@", "@@@"),
+  type = 'html'
+  )
 ```
 <br>
 
