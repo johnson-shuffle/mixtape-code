@@ -75,7 +75,7 @@ Yule (1899)
 
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University.
 E-mail: hlavac at fas.harvard.edu % Date and time: Fri, Jul 06, 2018 -
-23:48:02
+23:51:52
 <br>
 
 Simple difference in means decomposition
@@ -109,8 +109,8 @@ Simple difference in means decomposition
     ## Skim summary statistics
     ## 
     ## Variable type: numeric 
-    ##  variable missing complete     n mean   sd   p0  p25 p50 p75 p100     hist
-    ##       sdo       0    10000 10000  0.6 1.11 -1.8 -0.2 0.6 1.4    3 ▂▅▅▇▆▅▃▂
+    ##  variable missing complete     n mean  sd   p0  p25 p50 p75 p100     hist
+    ##       sdo       0    10000 10000 0.61 1.1 -1.8 -0.2 0.6 1.4    3 ▂▅▅▇▆▅▃▂
 
 STAR Experiment
 ---------------
@@ -145,8 +145,8 @@ STAR Experiment
       reg,
       #column.labels = labs,
       covariate.labels = vars,
-      dep.var.label = 'Test score',
-      dep.var.label.include = T,
+      dep.var.labels = 'Test score',
+      dep.var.labels.include = T,
       notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
       notes.append = F,
       star.char = c("@", "@@", "@@@"),
@@ -175,7 +175,7 @@ STAR Experiment
 <td style="text-align:left">
 </td>
 <td colspan="4">
-.
+Test score
 </td>
 </tr>
 <tr>
@@ -566,46 +566,6 @@ Residual Std. Error
 <em>Note:</em>
 </td>
 <td colspan="4" style="text-align:right">
-@ p &lt; 0.10, @@ p &lt; 0.05, @@@ p &lt; 0.01
-</td>
-</tr>
-</table>
-<table style="text-align:center">
-<tr>
-<td colspan="1" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td>
-Test score
-</td>
-</tr>
-<tr>
-<td colspan="1" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-@ p &lt; 0.10, @@ p &lt; 0.05, @@@ p &lt; 0.01
-</td>
-</tr>
-</table>
-<table style="text-align:center">
-<tr>
-<td colspan="1" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td>
-TRUE
-</td>
-</tr>
-<tr>
-<td colspan="1" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
 @ p &lt; 0.10, @@ p &lt; 0.05, @@@ p &lt; 0.01
 </td>
 </tr>

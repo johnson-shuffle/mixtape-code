@@ -3,7 +3,7 @@ title: "Potential outcomes causal model"
 date:
 always_allow_html: yes
 output:
-  html_document:
+  md_document:
     toc: true
     toc_depth: 2
 editor_options: 
