@@ -3,8 +3,7 @@
 -   [Expected value of OLS](#expected-value-of-ols)
 -   [Regression anatomy](#regression-anatomy)
 
-% Properties of regression
-
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 OLS regression line
 -------------------
 
@@ -73,6 +72,7 @@ Algebraic properties of OLS
       yhat_uhat = yhat * uhat
       )
 
+    # table 6
     # table 6
     out <- rbind(dat, colSums(dat))
     out %<>% cbind(tibble(no = c(1:10, 'Sum')), .)

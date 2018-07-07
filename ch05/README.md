@@ -1,13 +1,18 @@
 -   [Yule (1899)](#yule-1899)
 -   [Simple difference in means
     decomposition](#simple-difference-in-means-decomposition)
+-   [STAR Experiment](#star-experiment)
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 Yule (1899)
 -----------
 
+    # get the data
+    dat <- yule
+
     # reshape yule to long
     pat <- '(^[A-z]+[65]*)(\\d{2,4})(_\\d|O|I)*'
-    dat <- gather(yule, variable, value, -1:-7)
+    dat %<>% gather(variable, value, -1:-7)
     dat %<>% mutate(
       series = str_replace(dat$variable, pat, '\\1\\3'),
       year = str_replace(dat$variable, pat, '\\2')
@@ -77,3 +82,495 @@ Yule (1899)
 
 Simple difference in means decomposition
 ----------------------------------------
+
+    # construct the data
+    dat <- tribble(
+      ~patient, ~y1, ~y0,
+      1, 7, 1,
+      2, 5, 6,
+      3, 5, 1,
+      4, 7, 8,
+      5, 4, 2,
+      6, 10, 1,
+      7, 1, 10,
+      8, 5, 6,
+      9, 3, 7,
+      10, 9, 8
+    )
+    dat %<>% mutate(delta = y1 - y0)
+
+    # gap function
+    gap <- function(data) {
+      tmp <- sample(1:10, 5, replace = F)
+      mean(data$y1[1:10 %in% tmp]) - mean(data$y0[!1:10 %in% tmp])
+    }
+
+    # simulate
+    sdo <- replicate(1E4, gap(dat)) ; skim(sdo)
+
+    ## Skim summary statistics
+    ## 
+    ## Variable type: numeric 
+    ##  variable missing complete     n mean   sd   p0  p25 p50 p75 p100     hist
+    ##       sdo       0    10000 10000  0.6 1.11 -1.8 -0.2 0.6 1.4    3 ▂▅▅▇▆▅▃▂
+
+STAR Experiment
+---------------
+
+    library(lfe)
+
+    # get the data
+    dat <- star_sw
+
+    # models
+    mod <- 'tscorek ~ sck + rak' %>%
+      list(
+        .,
+        str_c(., ' | schidkn'),
+        str_c(., ' + white + boy + freelunk | schidkn'),
+        str_c(., ' + freelunk + totexpk | schidkn')
+      )
+
+    # regressions
+    reg <- map(mod, ~felm(as.formula(.), data = dat))
+
+    # figure 8
+    stargazer::stargazer(reg, type = 'html')
+
+<table style="text-align:center">
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="4">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="4">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+<td>
+(4)
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+sck
+</td>
+<td>
+13.899<sup>\*\*\*</sup>
+</td>
+<td>
+16.022<sup>\*\*\*</sup>
+</td>
+<td>
+15.977<sup>\*\*\*</sup>
+</td>
+<td>
+16.014<sup>\*\*\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(2.409)
+</td>
+<td>
+(2.169)
+</td>
+<td>
+(2.091)
+</td>
+<td>
+(2.108)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+rak
+</td>
+<td>
+0.314
+</td>
+<td>
+1.699
+</td>
+<td>
+2.146
+</td>
+<td>
+1.738
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(2.310)
+</td>
+<td>
+(2.085)
+</td>
+<td>
+(2.011)
+</td>
+<td>
+(2.036)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+white
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+23.986<sup>\*\*\*</sup>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(3.470)
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+boy
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-12.161<sup>\*\*\*</sup>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(1.664)
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+freelunk
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-35.022<sup>\*\*\*</sup>
+</td>
+<td>
+-37.279<sup>\*\*\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(2.010)
+</td>
+<td>
+(2.000)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+totexpk
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+0.680<sup>\*\*\*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.163)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+918.043<sup>\*\*\*</sup>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1.641)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+5,786
+</td>
+<td>
+5,786
+</td>
+<td>
+5,768
+</td>
+<td>
+5,749
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.007
+</td>
+<td>
+0.231
+</td>
+<td>
+0.288
+</td>
+<td>
+0.278
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.007
+</td>
+<td>
+0.220
+</td>
+<td>
+0.278
+</td>
+<td>
+0.268
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+73.490 (df = 5783)
+</td>
+<td>
+65.136 (df = 5705)
+</td>
+<td>
+62.716 (df = 5684)
+</td>
+<td>
+63.206 (df = 5666)
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="4" style="text-align:right">
+<sup>*</sup>p&lt;0.1; <sup>**</sup>p&lt;0.05; <sup>***</sup>p&lt;0.01
+</td>
+</tr>
+</table>
+    # first graders by class
+    fir <- rep('Regular', nrow(dat))
+    fir[is.na(dat$sc1) & is.na(dat$ra1)] <- NA
+    fir[dat$sc1 == 1] <- 'Small'
+    fir[dat$ra1 == 1] <- 'Aide'
+
+    # second graders by class
+    sec <- rep('Regular', nrow(dat))
+    sec[is.na(dat$sc2) & is.na(dat$ra2)] <- NA
+    sec[dat$sc2 == 1] <- 'Small'
+    sec[dat$ra2 == 1] <- 'Aide'
+
+    # figure 11
+    table(fir, sec)
+
+    ##          sec
+    ## fir       Aide Regular Small
+    ##   Aide    1560     115    40
+    ##   Regular  202    1498   152
+    ##   Small     24      23  1435

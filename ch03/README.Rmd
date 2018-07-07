@@ -1,5 +1,5 @@
 ---
-title:
+title: "Properties of regression"
 author:
 date:
 always_allow_html: yes
@@ -11,7 +11,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-% Properties of regression
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, echo = F, message = F}
 knitr::opts_chunk$set(
@@ -90,6 +90,7 @@ dat %<>% mutate(
   yhat_uhat = yhat * uhat
   )
 
+# table 6
 # table 6
 out <- rbind(dat, colSums(dat))
 out %<>% cbind(tibble(no = c(1:10, 'Sum')), .)

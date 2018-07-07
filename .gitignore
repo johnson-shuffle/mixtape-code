@@ -6,3 +6,4 @@
 *.Ruserdata
 *.DS_Store
 /cache
+.Rproj.user

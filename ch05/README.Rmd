@@ -10,6 +10,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 ```{r setup, echo = F, message = F}
 knitr::opts_chunk$set(
   cache = T,
@@ -26,9 +28,12 @@ library(mixtape)
 
 ```{r yule}
 
+# get the data
+dat <- yule
+
 # reshape yule to long
 pat <- '(^[A-z]+[65]*)(\\d{2,4})(_\\d|O|I)*'
-dat <- gather(yule, variable, value, -1:-7)
+dat %<>% gather(variable, value, -1:-7)
 dat %<>% mutate(
   series = str_replace(dat$variable, pat, '\\1\\3'),
   year = str_replace(dat$variable, pat, '\\2')
@@ -89,3 +94,74 @@ reg
 ```
 
 ## Simple difference in means decomposition
+
+```{r diff_means}
+
+# construct the data
+dat <- tribble(
+  ~patient, ~y1, ~y0,
+  1, 7, 1,
+  2, 5, 6,
+  3, 5, 1,
+  4, 7, 8,
+  5, 4, 2,
+  6, 10, 1,
+  7, 1, 10,
+  8, 5, 6,
+  9, 3, 7,
+  10, 9, 8
+)
+dat %<>% mutate(delta = y1 - y0)
+
+# gap function
+gap <- function(data) {
+  tmp <- sample(1:10, 5, replace = F)
+  mean(data$y1[1:10 %in% tmp]) - mean(data$y0[!1:10 %in% tmp])
+}
+
+# simulate
+sdo <- replicate(1E4, gap(dat)) ; skim(sdo)
+```
+
+## STAR Experiment
+
+```{r star_fig08, results = 'asis'}
+
+library(lfe)
+
+# get the data
+dat <- star_sw
+
+# models
+mod <- 'tscorek ~ sck + rak' %>%
+  list(
+    .,
+    str_c(., ' | schidkn'),
+    str_c(., ' + white + boy + freelunk | schidkn'),
+    str_c(., ' + freelunk + totexpk | schidkn')
+  )
+
+# regressions
+reg <- map(mod, ~felm(as.formula(.), data = dat))
+
+# figure 8
+stargazer::stargazer(reg, type = 'html')
+```
+
+```{r star_fig11}
+
+# first graders by class
+fir <- rep('Regular', nrow(dat))
+fir[is.na(dat$sc1) & is.na(dat$ra1)] <- NA
+fir[dat$sc1 == 1] <- 'Small'
+fir[dat$ra1 == 1] <- 'Aide'
+
+# second graders by class
+sec <- rep('Regular', nrow(dat))
+sec[is.na(dat$sc2) & is.na(dat$ra2)] <- NA
+sec[dat$sc2 == 1] <- 'Small'
+sec[dat$ra2 == 1] <- 'Aide'
+
+# figure 11
+table(fir, sec)
+```

@@ -3,6 +3,7 @@
 -   [Qualitative change in sign](#qualitative-change-in-sign)
 -   [Nonrandom sample selection](#nonrandom-sample-selection)
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 Gender disparities controlling for occupation
 ---------------------------------------------
 
@@ -69,184 +70,302 @@ Gender disparities controlling for occupation
       lm(wage ~ discrim + occupat + ability, data = dat)
       )
 
-    # tidy the data
-    reg %<>% map_dfr(tidy)
-    reg$model <- c(
-      rep('Biased unconditional', 2),
-      rep('Biased', 3),
-      rep('Unbiased conditional', 4)
-      )
-
     # table 8
-    out <- gather(reg, statistic, value, -term, -model) %>%
-      filter(statistic %in% c('estimate', 'std.error')) %>%
-      mutate(
-        value = format(value, digits = 2),
-        value = str_trim(value),
-        value = if_else(statistic == 'std.error', str_c('(', value, ')'), value)
-      ) %>%
-      spread(model, value, fill = '') %>%
-      select(-statistic)
-
-    out <- out[c(1:2, 5:6, 7:8, 3:4), c(1, 3, 2, 4)]
-    out[, 1] <- c(
-      '(Intercept)', '',
-      'Female', '',
-      'Occupation', '',
-      'Ability', ''
-    )
-    names(out)[1] <- c('Covariates:')
-    out %<>% add_row(
-      `Covariates:` = 'N',
-      `Biased unconditional` = '10,000',
-      `Biased` = '10,000',
-      `Unbiased conditional` = '10,000'
+    labs <- c('Biased unconditional', 'Biased', 'Unbiased conditional')
+    vars <- c('Female', 'Occupation', 'Ability')
+    stargazer(
+      reg,
+      column.labels = labs,
+      covariate.labels = vars,
+      notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
+      notes.append = F,
+      star.char = c("@", "@@", "@@@"),
+      type = 'html'
       )
 
-    knitr::kable(
-      out,
-      align = 'c',
-      row.names = F,
-      format = 'html'
-      ) %>%
-      kableExtra::row_spec(9, bold = T) %>%
-      kableExtra::kable_styling()
-
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
+<table style="text-align:center">
 <tr>
-<th style="text-align:center;">
-Covariates:
-</th>
-<th style="text-align:center;">
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+wage
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
 Biased unconditional
-</th>
-<th style="text-align:center;">
+</td>
+<td>
 Biased
-</th>
-<th style="text-align:center;">
+</td>
+<td>
 Unbiased conditional
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;">
-(Intercept)
-</td>
-<td style="text-align:center;">
-2.0366
-</td>
-<td style="text-align:center;">
-0.2065
-</td>
-<td style="text-align:center;">
-0.9880
 </td>
 </tr>
 <tr>
-<td style="text-align:center;">
+<td style="text-align:left">
 </td>
-<td style="text-align:center;">
-(0.0602)
+<td>
+(1)
 </td>
-<td style="text-align:center;">
-(0.0199)
+<td>
+(2)
 </td>
-<td style="text-align:center;">
-(0.0172)
+<td>
+(3)
 </td>
 </tr>
 <tr>
-<td style="text-align:center;">
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
 Female
 </td>
-<td style="text-align:center;">
--2.9937
+<td>
+-2.994<sup>@@@</sup>
 </td>
-<td style="text-align:center;">
-0.6035
+<td>
+0.604<sup>@@@</sup>
 </td>
-<td style="text-align:center;">
--0.9756
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-(0.0850)
-</td>
-<td style="text-align:center;">
-(0.0292)
-</td>
-<td style="text-align:center;">
-(0.0280)
+<td>
+-0.976<sup>@@@</sup>
 </td>
 </tr>
 <tr>
-<td style="text-align:center;">
+<td style="text-align:left">
+</td>
+<td>
+(0.085)
+</td>
+<td>
+(0.029)
+</td>
+<td>
+(0.028)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
 Occupation
 </td>
-<td style="text-align:center;">
+<td>
 </td>
-<td style="text-align:center;">
-1.8018
+<td>
+1.802<sup>@@@</sup>
 </td>
-<td style="text-align:center;">
-1.0093
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-(0.0060)
-</td>
-<td style="text-align:center;">
-(0.0099)
+<td>
+1.009<sup>@@@</sup>
 </td>
 </tr>
 <tr>
-<td style="text-align:center;">
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+(0.006)
+</td>
+<td>
+(0.010)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
 Ability
 </td>
-<td style="text-align:center;">
+<td>
 </td>
-<td style="text-align:center;">
+<td>
 </td>
-<td style="text-align:center;">
-1.9794
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-(0.0221)
+<td>
+1.979<sup>@@@</sup>
 </td>
 </tr>
 <tr>
-<td style="text-align:center;font-weight: bold;">
-N
+<td style="text-align:left">
 </td>
-<td style="text-align:center;font-weight: bold;">
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.022)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+2.037<sup>@@@</sup>
+</td>
+<td>
+0.206<sup>@@@</sup>
+</td>
+<td>
+0.988<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.060)
+</td>
+<td>
+(0.020)
+</td>
+<td>
+(0.017)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
 10,000
 </td>
-<td style="text-align:center;font-weight: bold;">
+<td>
 10,000
 </td>
-<td style="text-align:center;font-weight: bold;">
+<td>
 10,000
 </td>
 </tr>
-</tbody>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.110
+</td>
+<td>
+0.912
+</td>
+<td>
+0.951
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.110
+</td>
+<td>
+0.912
+</td>
+<td>
+0.951
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+4.248 (df = 9998)
+</td>
+<td>
+1.335 (df = 9997)
+</td>
+<td>
+0.994 (df = 9996)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+1,241.733<sup>@@@</sup> (df = 1; 9998)
+</td>
+<td>
+51,902.450<sup>@@@</sup> (df = 2; 9997)
+</td>
+<td>
+65,147.980<sup>@@@</sup> (df = 3; 9996)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="3" style="text-align:right">
+@ p &lt; 0.10, @@ p &lt; 0.05, @@@ p &lt; 0.01
+</td>
+</tr>
 </table>
 <br>
 
@@ -286,160 +405,182 @@ Qualitative change in sign
     # use stata style robust standard errors
     reg <- map(reg, ~coeftest(.x, vcov = vcovHC(.x, "HC1")))
 
-    # tidy the data
-    reg %<>% map_dfr(tidy)
-    reg$model <- c(
-      rep(1, 2),
-      rep(2, 2),
-      rep(3, 3)
-      )
-
     # table 9
-    out <- gather(reg, statistic, value, -term, -model) %>%
-      filter(statistic %in% c('estimate', 'std.error')) %>%
-      mutate(
-        value = format(value, digits = 2),
-        value = str_trim(value),
-        value = if_else(statistic == 'std.error', str_c('(', value, ')'), value)
-      ) %>%
-      spread(model, value, fill = '') %>%
-      select(-statistic)
-
-    out$term <- c(
-      '(Intercept)', '',
-      'd', '',
-      'x', ''
-    )
-    names(out)[1] <- c('Covariates:')
-    out %<>% add_row(
-      `Covariates:` = 'N',
-      `1` = '2,500',
-      `2` = '2,500',
-      `3` = '2,500'
+    stargazer(
+      reg,
+      #column.labels = labs,
+      #covariate.labels = vars,
+      notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
+      notes.append = F,
+      star.char = c("@", "@@", "@@@"),
+      type = 'html'
       )
 
-    knitr::kable(
-      out,
-      align = 'c',
-      row.names = F,
-      format = 'html'
-      ) %>%
-      kableExtra::row_spec(7, bold = T) %>%
-      kableExtra::kable_styling()
-
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
+<table style="text-align:center">
 <tr>
-<th style="text-align:center;">
-Covariates:
-</th>
-<th style="text-align:center;">
-1
-</th>
-<th style="text-align:center;">
-2
-</th>
-<th style="text-align:center;">
-3
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;">
-(Intercept)
-</td>
-<td style="text-align:center;">
-99.9825
-</td>
-<td style="text-align:center;">
-24.9846
-</td>
-<td style="text-align:center;">
-26.1083
+<td colspan="4" style="border-bottom: 1px solid black">
 </td>
 </tr>
 <tr>
-<td style="text-align:center;">
+<td style="text-align:left">
 </td>
-<td style="text-align:center;">
-(0.0241)
-</td>
-<td style="text-align:center;">
-(0.0561)
-</td>
-<td style="text-align:center;">
-(1.4680)
+<td colspan="3">
+<em>Dependent variable:</em>
 </td>
 </tr>
 <tr>
-<td style="text-align:center;">
+<td>
+</td>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
 d
 </td>
-<td style="text-align:center;">
-50.0134
+<td>
+50.013<sup>@@@</sup>
 </td>
-<td style="text-align:center;">
+<td>
 </td>
-<td style="text-align:center;">
-0.7502
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-(0.0423)
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-(0.9811)
+<td>
+0.750
 </td>
 </tr>
 <tr>
-<td style="text-align:center;">
+<td style="text-align:left">
+</td>
+<td>
+(0.042)
+</td>
+<td>
+</td>
+<td>
+(0.981)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
 x
 </td>
-<td style="text-align:center;">
+<td>
 </td>
-<td style="text-align:center;">
-0.5000
+<td>
+0.500<sup>@@@</sup>
 </td>
-<td style="text-align:center;">
-0.4925
+<td>
+0.493<sup>@@@</sup>
 </td>
 </tr>
 <tr>
-<td style="text-align:center;">
+<td style="text-align:left">
 </td>
-<td style="text-align:center;">
+<td>
 </td>
-<td style="text-align:center;">
+<td>
 (0.0003)
 </td>
-<td style="text-align:center;">
-(0.0098)
+<td>
+(0.010)
 </td>
 </tr>
 <tr>
-<td style="text-align:center;font-weight: bold;">
-N
+<td style="text-align:left">
 </td>
-<td style="text-align:center;font-weight: bold;">
-2,500
+<td>
 </td>
-<td style="text-align:center;font-weight: bold;">
-2,500
+<td>
 </td>
-<td style="text-align:center;font-weight: bold;">
-2,500
+<td>
 </td>
 </tr>
-</tbody>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+99.983<sup>@@@</sup>
+</td>
+<td>
+24.985<sup>@@@</sup>
+</td>
+<td>
+26.108<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.024)
+</td>
+<td>
+(0.056)
+</td>
+<td>
+(1.468)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="3" style="text-align:right">
+@ p &lt; 0.10, @@ p &lt; 0.05, @@@ p &lt; 0.01
+</td>
+</tr>
 </table>
-<br>
-
 Nonrandom sample selection
 --------------------------
 

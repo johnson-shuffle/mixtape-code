@@ -10,6 +10,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 ```{r setup, echo = F, message = F}
 knitr::opts_chunk$set(
   cache = T,
@@ -20,11 +22,12 @@ knitr::opts_chunk$set(
   )
 load_tidy()
 library(mixtape)
+library(stargazer)
 ```
 
 ## Gender disparities controlling for occupation
 
-```{r gender}
+```{r gender, results = 'asis'}
 
 library(ggraph)
 library(tidygraph)
@@ -88,54 +91,24 @@ reg <- list(
   lm(wage ~ discrim + occupat + ability, data = dat)
   )
 
-# tidy the data
-reg %<>% map_dfr(tidy)
-reg$model <- c(
-  rep('Biased unconditional', 2),
-  rep('Biased', 3),
-  rep('Unbiased conditional', 4)
-  )
-
 # table 8
-out <- gather(reg, statistic, value, -term, -model) %>%
-  filter(statistic %in% c('estimate', 'std.error')) %>%
-  mutate(
-    value = format(value, digits = 2),
-    value = str_trim(value),
-    value = if_else(statistic == 'std.error', str_c('(', value, ')'), value)
-  ) %>%
-  spread(model, value, fill = '') %>%
-  select(-statistic)
-
-out <- out[c(1:2, 5:6, 7:8, 3:4), c(1, 3, 2, 4)]
-out[, 1] <- c(
-  '(Intercept)', '',
-  'Female', '',
-  'Occupation', '',
-  'Ability', ''
-)
-names(out)[1] <- c('Covariates:')
-out %<>% add_row(
-  `Covariates:` = 'N',
-  `Biased unconditional` = '10,000',
-  `Biased` = '10,000',
-  `Unbiased conditional` = '10,000'
+labs <- c('Biased unconditional', 'Biased', 'Unbiased conditional')
+vars <- c('Female', 'Occupation', 'Ability')
+stargazer(
+  reg,
+  column.labels = labs,
+  covariate.labels = vars,
+  notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
+  notes.append = F,
+  star.char = c("@", "@@", "@@@"),
+  type = 'html'
   )
-
-knitr::kable(
-  out,
-  align = 'c',
-  row.names = F,
-  format = 'html'
-  ) %>%
-  kableExtra::row_spec(9, bold = T) %>%
-  kableExtra::kable_styling()
 ```
 <br>
 
 ## Qualitative change in sign
 
-```{r qual_change}
+```{r qual_change, results = 'asis'}
 
 library(sandwich)
 library(lmtest)
@@ -170,48 +143,17 @@ reg <- list(
 # use stata style robust standard errors
 reg <- map(reg, ~coeftest(.x, vcov = vcovHC(.x, "HC1")))
 
-# tidy the data
-reg %<>% map_dfr(tidy)
-reg$model <- c(
-  rep(1, 2),
-  rep(2, 2),
-  rep(3, 3)
-  )
-
 # table 9
-out <- gather(reg, statistic, value, -term, -model) %>%
-  filter(statistic %in% c('estimate', 'std.error')) %>%
-  mutate(
-    value = format(value, digits = 2),
-    value = str_trim(value),
-    value = if_else(statistic == 'std.error', str_c('(', value, ')'), value)
-  ) %>%
-  spread(model, value, fill = '') %>%
-  select(-statistic)
-
-out$term <- c(
-  '(Intercept)', '',
-  'd', '',
-  'x', ''
-)
-names(out)[1] <- c('Covariates:')
-out %<>% add_row(
-  `Covariates:` = 'N',
-  `1` = '2,500',
-  `2` = '2,500',
-  `3` = '2,500'
+stargazer(
+  reg,
+  #column.labels = labs,
+  #covariate.labels = vars,
+  notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
+  notes.append = F,
+  star.char = c("@", "@@", "@@@"),
+  type = 'html'
   )
-
-knitr::kable(
-  out,
-  align = 'c',
-  row.names = F,
-  format = 'html'
-  ) %>%
-  kableExtra::row_spec(7, bold = T) %>%
-  kableExtra::kable_styling()
 ```
-<br>
 
 ## Nonrandom sample selection
 
