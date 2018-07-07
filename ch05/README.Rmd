@@ -152,7 +152,7 @@ mod <- 'tscorek ~ sck + rak' %>%
     .,
     str_c(., ' | schidkn'),
     str_c(., ' + white + boy + freelunk | schidkn'),
-    str_c(., ' + freelunk + totexpk | schidkn')
+    str_c(., ' + white + boy + freelunk + totexpk | schidkn')
   )
 
 # regressions

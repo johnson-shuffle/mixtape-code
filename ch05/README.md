@@ -304,7 +304,7 @@ STAR Experiment
         .,
         str_c(., ' | schidkn'),
         str_c(., ' + white + boy + freelunk | schidkn'),
-        str_c(., ' + freelunk + totexpk | schidkn')
+        str_c(., ' + white + boy + freelunk + totexpk | schidkn')
       )
 
     # regressions
@@ -390,7 +390,7 @@ Small class
 15.977<sup>@@@</sup>
 </td>
 <td>
-16.014<sup>@@@</sup>
+15.901<sup>@@@</sup>
 </td>
 </tr>
 <tr>
@@ -406,7 +406,7 @@ Small class
 (2.091)
 </td>
 <td>
-(2.108)
+(2.090)
 </td>
 </tr>
 <tr>
@@ -435,7 +435,7 @@ Regular/aide class
 2.146
 </td>
 <td>
-1.738
+1.765
 </td>
 </tr>
 <tr>
@@ -451,7 +451,7 @@ Regular/aide class
 (2.011)
 </td>
 <td>
-(2.036)
+(2.019)
 </td>
 </tr>
 <tr>
@@ -478,6 +478,7 @@ White
 23.986<sup>@@@</sup>
 </td>
 <td>
+24.224<sup>@@@</sup>
 </td>
 </tr>
 <tr>
@@ -491,6 +492,7 @@ White
 (3.470)
 </td>
 <td>
+(3.468)
 </td>
 </tr>
 <tr>
@@ -517,6 +519,7 @@ Boy
 -12.161<sup>@@@</sup>
 </td>
 <td>
+-12.088<sup>@@@</sup>
 </td>
 </tr>
 <tr>
@@ -530,6 +533,7 @@ Boy
 (1.664)
 </td>
 <td>
+(1.666)
 </td>
 </tr>
 <tr>
@@ -556,7 +560,7 @@ Free lunch
 -35.022<sup>@@@</sup>
 </td>
 <td>
--37.279<sup>@@@</sup>
+-34.882<sup>@@@</sup>
 </td>
 </tr>
 <tr>
@@ -570,7 +574,7 @@ Free lunch
 (2.010)
 </td>
 <td>
-(2.000)
+(2.014)
 </td>
 </tr>
 <tr>
@@ -596,7 +600,7 @@ Teacher experience
 <td>
 </td>
 <td>
-0.680<sup>@@@</sup>
+0.661<sup>@@@</sup>
 </td>
 </tr>
 <tr>
@@ -609,7 +613,7 @@ Teacher experience
 <td>
 </td>
 <td>
-(0.163)
+(0.162)
 </td>
 </tr>
 <tr>
@@ -681,7 +685,7 @@ Observations
 5,768
 </td>
 <td>
-5,749
+5,748
 </td>
 </tr>
 <tr>
@@ -698,7 +702,7 @@ R<sup>2</sup>
 0.288
 </td>
 <td>
-0.278
+0.291
 </td>
 </tr>
 <tr>
@@ -715,7 +719,7 @@ Adjusted R<sup>2</sup>
 0.278
 </td>
 <td>
-0.268
+0.280
 </td>
 </tr>
 <tr>
@@ -732,7 +736,7 @@ Residual Std. Error
 62.716 (df = 5684)
 </td>
 <td>
-63.206 (df = 5666)
+62.667 (df = 5663)
 </td>
 </tr>
 <tr>
