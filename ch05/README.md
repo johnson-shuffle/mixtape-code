@@ -71,11 +71,189 @@ Yule (1899)
     reg <- lm(dpaup ~ dout + dold + dpop, data = filter(dat, Type > 1))
 
     # table 10
-    stargazer(reg)
+    vars <- c('Outrelief', 'Old', 'Pop')
+    stargazer(
+      reg,
+      #column.labels = labs,
+      covariate.labels = vars,
+      dep.var.labels = 'Pauperism growth',
+      dep.var.labels.include = T,
+      notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
+      notes.append = F,
+      star.char = c("@", "@@", "@@@"),
+      type = 'html'
+      )
 
-% Table created by stargazer v.5.2 by Marek Hlavac, Harvard University.
-E-mail: hlavac at fas.harvard.edu % Date and time: Fri, Jul 06, 2018 -
-23:51:52
+<table style="text-align:center">
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+Pauperism growth
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Outrelief
+</td>
+<td>
+0.312<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.019)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Old
+</td>
+<td>
+-0.031<sup>@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.017)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Pop
+</td>
+<td>
+-0.224<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.036)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+81.392<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(5.084)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+703
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.302
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.299
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+21.519 (df = 699)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+100.872<sup>@@@</sup> (df = 3; 699)
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+@ p &lt; 0.10, @@ p &lt; 0.05, @@@ p &lt; 0.01
+</td>
+</tr>
+</table>
 <br>
 
 Simple difference in means decomposition

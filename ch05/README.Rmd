@@ -92,7 +92,18 @@ dat %<>% mutate(
 reg <- lm(dpaup ~ dout + dold + dpop, data = filter(dat, Type > 1))
 
 # table 10
-stargazer(reg)
+vars <- c('Outrelief', 'Old', 'Pop')
+stargazer(
+  reg,
+  #column.labels = labs,
+  covariate.labels = vars,
+  dep.var.labels = 'Pauperism growth',
+  dep.var.labels.include = T,
+  notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
+  notes.append = F,
+  star.char = c("@", "@@", "@@@"),
+  type = 'html'
+  )
 ```
 <br>
 
