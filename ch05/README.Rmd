@@ -149,11 +149,10 @@ dat <- star_sw
 # models
 mod <- 'tscorek ~ sck + rak' %>%
   list(
-    .,
     str_c(., ' | schidkn'),
     str_c(., ' + white + boy + freelunk | schidkn'),
     str_c(., ' + white + boy + freelunk + totexpk | schidkn')
-  )
+    )
 
 # regressions
 reg <- map(mod, ~felm(as.formula(.), data = dat))
@@ -171,7 +170,48 @@ stargazer(
   reg,
   #column.labels = labs,
   covariate.labels = vars,
-  dep.var.labels = 'Test score',
+  dep.var.labels = 'Kindergarten test score',
+  dep.var.labels.include = T,
+  notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
+  notes.append = F,
+  star.char = c("@", "@@", "@@@"),
+  type = 'html'
+  )
+```
+<br>
+
+```{r star_fig09, results = 'asis'}
+
+library(lfe)
+
+# get the data
+dat <- star_sw
+
+# models
+mod <- 'tscore1 ~ sc1 + ra1' %>%
+  list(
+    str_c(., ' | schid1n'),
+    str_c(., ' + white + boy + freelun1 | schid1n'),
+    str_c(., ' + white + boy + freelun1 + totexp1 | schid1n')
+    )
+
+# regressions
+reg <- map(mod, ~felm(as.formula(.), data = dat))
+
+# figure 8
+vars <- c(
+  'Small class',
+  'Regular/aide class',
+  'White',
+  'Boy',
+  'Free lunch',
+  'Teacher experience'
+  )
+stargazer(
+  reg,
+  #column.labels = labs,
+  covariate.labels = vars,
+  dep.var.labels = 'First grade test score',
   dep.var.labels.include = T,
   notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
   notes.append = F,
@@ -198,3 +238,47 @@ sec[dat$ra2 == 1] <- 'Aide'
 # figure 11
 table(fir, sec)
 ```
+
+```{r star_fig12, results = 'asis'}
+
+library(lfe)
+
+# get the data
+dat <- star_sw
+
+# models
+mod <- 'tscore1 ~ sc + ra' %>%
+  list(
+    str_c(., ' | schid1n'),
+    str_c(., ' + white + boy + freelun1 | schid1n'),
+    str_c(., ' + white + boy + freelun1 + totexp1 | schid1n')
+    )
+
+# regressions
+reg1 <- map(mod, ~felm(as.formula(.), data = mutate(dat, sc = sc1, ra = ra1)))
+regk <- map(mod, ~felm(as.formula(.), data = mutate(dat, sc = sck, ra = rak)))
+
+# figure 12
+labs <- c('OLS: actual class size', 'Reduced form: initial class size')
+vars <- c(
+  'Small class',
+  'Regular/aide class',
+  'White',
+  'Boy',
+  'Free lunch',
+  'Teacher experience'
+  )
+stargazer(
+  reg1, regk,
+  column.labels = labs,
+  column.separate = c(4, 4),
+  covariate.labels = vars,
+  dep.var.labels = 'First grade test score',
+  dep.var.labels.include = T,
+  notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
+  notes.append = F,
+  star.char = c("@", "@@", "@@@"),
+  type = 'html'
+  )
+```
+<br>

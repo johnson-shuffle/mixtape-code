@@ -287,8 +287,8 @@ Simple difference in means decomposition
     ## Skim summary statistics
     ## 
     ## Variable type: numeric 
-    ##  variable missing complete     n mean  sd   p0  p25 p50 p75 p100     hist
-    ##       sdo       0    10000 10000 0.61 1.1 -1.8 -0.2 0.6 1.4    3 ▂▅▅▇▆▅▃▂
+    ##  variable missing complete     n mean   sd   p0  p25 p50 p75 p100     hist
+    ##       sdo       0    10000 10000 0.59 1.11 -1.8 -0.2 0.6 1.4    3 ▂▅▅▇▆▅▃▂
 
 STAR Experiment
 ---------------
@@ -301,11 +301,10 @@ STAR Experiment
     # models
     mod <- 'tscorek ~ sck + rak' %>%
       list(
-        .,
         str_c(., ' | schidkn'),
         str_c(., ' + white + boy + freelunk | schidkn'),
         str_c(., ' + white + boy + freelunk + totexpk | schidkn')
-      )
+        )
 
     # regressions
     reg <- map(mod, ~felm(as.formula(.), data = dat))
@@ -323,7 +322,7 @@ STAR Experiment
       reg,
       #column.labels = labs,
       covariate.labels = vars,
-      dep.var.labels = 'Test score',
+      dep.var.labels = 'Kindergarten test score',
       dep.var.labels.include = T,
       notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
       notes.append = F,
@@ -353,7 +352,7 @@ STAR Experiment
 <td style="text-align:left">
 </td>
 <td colspan="4">
-Test score
+Kindergarten test score
 </td>
 </tr>
 <tr>
@@ -754,6 +753,466 @@ Residual Std. Error
 </table>
 <br>
 
+    library(lfe)
+
+    # get the data
+    dat <- star_sw
+
+    # models
+    mod <- 'tscore1 ~ sc1 + ra1' %>%
+      list(
+        str_c(., ' | schid1n'),
+        str_c(., ' + white + boy + freelun1 | schid1n'),
+        str_c(., ' + white + boy + freelun1 + totexp1 | schid1n')
+        )
+
+    # regressions
+    reg <- map(mod, ~felm(as.formula(.), data = dat))
+
+    # figure 8
+    vars <- c(
+      'Small class',
+      'Regular/aide class',
+      'White',
+      'Boy',
+      'Free lunch',
+      'Teacher experience'
+      )
+    stargazer(
+      reg,
+      #column.labels = labs,
+      covariate.labels = vars,
+      dep.var.labels = 'First grade test score',
+      dep.var.labels.include = T,
+      notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
+      notes.append = F,
+      star.char = c("@", "@@", "@@@"),
+      type = 'html'
+      )
+
+<table style="text-align:center">
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="4">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="4">
+First grade test score
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+<td>
+(4)
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Small class
+</td>
+<td>
+29.781<sup>@@@</sup>
+</td>
+<td>
+29.009<sup>@@@</sup>
+</td>
+<td>
+27.194<sup>@@@</sup>
+</td>
+<td>
+26.716<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(2.807)
+</td>
+<td>
+(2.491)
+</td>
+<td>
+(2.412)
+</td>
+<td>
+(2.427)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Regular/aide class
+</td>
+<td>
+11.959<sup>@@@</sup>
+</td>
+<td>
+7.240<sup>@@@</sup>
+</td>
+<td>
+6.817<sup>@@@</sup>
+</td>
+<td>
+6.292<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(2.686)
+</td>
+<td>
+(2.417)
+</td>
+<td>
+(2.356)
+</td>
+<td>
+(2.374)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+White
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+24.476<sup>@@@</sup>
+</td>
+<td>
+24.426<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(3.701)
+</td>
+<td>
+(3.700)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Boy
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-11.016<sup>@@@</sup>
+</td>
+<td>
+-11.079<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(1.933)
+</td>
+<td>
+(1.933)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Free lunch
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-45.841<sup>@@@</sup>
+</td>
+<td>
+-45.834<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(2.320)
+</td>
+<td>
+(2.320)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Teacher experience
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+0.223<sup>@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.126)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+1,039.393<sup>@@@</sup>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1.836)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+6,379
+</td>
+<td>
+6,379
+</td>
+<td>
+6,227
+</td>
+<td>
+6,227
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.017
+</td>
+<td>
+0.257
+</td>
+<td>
+0.319
+</td>
+<td>
+0.319
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.017
+</td>
+<td>
+0.248
+</td>
+<td>
+0.310
+</td>
+<td>
+0.310
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+90.501 (df = 6376)
+</td>
+<td>
+79.161 (df = 6302)
+</td>
+<td>
+75.830 (df = 6147)
+</td>
+<td>
+75.817 (df = 6146)
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="4" style="text-align:right">
+@ p &lt; 0.10, @@ p &lt; 0.05, @@@ p &lt; 0.01
+</td>
+</tr>
+</table>
+<br>
+
     # first graders by class
     fir <- rep('Regular', nrow(dat))
     fir[is.na(dat$sc1) & is.na(dat$ra1)] <- NA
@@ -774,3 +1233,736 @@ Residual Std. Error
     ##   Aide    1560     115    40
     ##   Regular  202    1498   152
     ##   Small     24      23  1435
+
+    library(lfe)
+
+    # get the data
+    dat <- star_sw
+
+    # models
+    mod <- 'tscore1 ~ sc + ra' %>%
+      list(
+        str_c(., ' | schid1n'),
+        str_c(., ' + white + boy + freelun1 | schid1n'),
+        str_c(., ' + white + boy + freelun1 + totexp1 | schid1n')
+        )
+
+    # regressions
+    reg1 <- map(mod, ~felm(as.formula(.), data = mutate(dat, sc = sc1, ra = ra1)))
+    regk <- map(mod, ~felm(as.formula(.), data = mutate(dat, sc = sck, ra = rak)))
+
+    # figure 12
+    labs <- c('OLS: actual class size', 'Reduced form: initial class size')
+    vars <- c(
+      'Small class',
+      'Regular/aide class',
+      'White',
+      'Boy',
+      'Free lunch',
+      'Teacher experience'
+      )
+    stargazer(
+      reg1, regk,
+      column.labels = labs,
+      column.separate = c(4, 4),
+      covariate.labels = vars,
+      dep.var.labels = 'First grade test score',
+      dep.var.labels.include = T,
+      notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
+      notes.append = F,
+      star.char = c("@", "@@", "@@@"),
+      type = 'html'
+      )
+
+<table style="text-align:center">
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="8">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="8" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="8">
+First grade test score
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="4">
+OLS: actual class size
+</td>
+<td colspan="4">
+Reduced form: initial class size
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+<td>
+(4)
+</td>
+<td>
+(5)
+</td>
+<td>
+(6)
+</td>
+<td>
+(7)
+</td>
+<td>
+(8)
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Small class
+</td>
+<td>
+29.781<sup>@@@</sup>
+</td>
+<td>
+29.009<sup>@@@</sup>
+</td>
+<td>
+27.194<sup>@@@</sup>
+</td>
+<td>
+26.716<sup>@@@</sup>
+</td>
+<td>
+19.782<sup>@@@</sup>
+</td>
+<td>
+20.350<sup>@@@</sup>
+</td>
+<td>
+21.045<sup>@@@</sup>
+</td>
+<td>
+20.900<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(2.807)
+</td>
+<td>
+(2.491)
+</td>
+<td>
+(2.412)
+</td>
+<td>
+(2.427)
+</td>
+<td>
+(3.505)
+</td>
+<td>
+(3.091)
+</td>
+<td>
+(3.000)
+</td>
+<td>
+(3.003)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Regular/aide class
+</td>
+<td>
+11.959<sup>@@@</sup>
+</td>
+<td>
+7.240<sup>@@@</sup>
+</td>
+<td>
+6.817<sup>@@@</sup>
+</td>
+<td>
+6.292<sup>@@@</sup>
+</td>
+<td>
+-2.082
+</td>
+<td>
+-0.660
+</td>
+<td>
+0.642
+</td>
+<td>
+0.657
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(2.686)
+</td>
+<td>
+(2.417)
+</td>
+<td>
+(2.356)
+</td>
+<td>
+(2.374)
+</td>
+<td>
+(3.404)
+</td>
+<td>
+(3.010)
+</td>
+<td>
+(2.919)
+</td>
+<td>
+(2.919)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+White
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+24.476<sup>@@@</sup>
+</td>
+<td>
+24.426<sup>@@@</sup>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+21.592<sup>@@@</sup>
+</td>
+<td>
+21.455<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(3.701)
+</td>
+<td>
+(3.700)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(5.190)
+</td>
+<td>
+(5.191)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Boy
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-11.016<sup>@@@</sup>
+</td>
+<td>
+-11.079<sup>@@@</sup>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-12.599<sup>@@@</sup>
+</td>
+<td>
+-12.656<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(1.933)
+</td>
+<td>
+(1.933)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(2.396)
+</td>
+<td>
+(2.396)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Free lunch
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-45.841<sup>@@@</sup>
+</td>
+<td>
+-45.834<sup>@@@</sup>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-49.372<sup>@@@</sup>
+</td>
+<td>
+-49.357<sup>@@@</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(2.320)
+</td>
+<td>
+(2.320)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(2.916)
+</td>
+<td>
+(2.916)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Teacher experience
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+0.223<sup>@</sup>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+0.188
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.126)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.156)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+1,039.393<sup>@@@</sup>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+1,056.508<sup>@@@</sup>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1.836)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(2.426)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+6,379
+</td>
+<td>
+6,379
+</td>
+<td>
+6,227
+</td>
+<td>
+6,227
+</td>
+<td>
+4,298
+</td>
+<td>
+4,298
+</td>
+<td>
+4,213
+</td>
+<td>
+4,213
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.017
+</td>
+<td>
+0.257
+</td>
+<td>
+0.319
+</td>
+<td>
+0.319
+</td>
+<td>
+0.011
+</td>
+<td>
+0.268
+</td>
+<td>
+0.327
+</td>
+<td>
+0.327
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.017
+</td>
+<td>
+0.248
+</td>
+<td>
+0.310
+</td>
+<td>
+0.310
+</td>
+<td>
+0.010
+</td>
+<td>
+0.255
+</td>
+<td>
+0.314
+</td>
+<td>
+0.314
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+90.501 (df = 6376)
+</td>
+<td>
+79.161 (df = 6302)
+</td>
+<td>
+75.830 (df = 6147)
+</td>
+<td>
+75.817 (df = 6146)
+</td>
+<td>
+92.579 (df = 4295)
+</td>
+<td>
+80.328 (df = 4221)
+</td>
+<td>
+77.031 (df = 4133)
+</td>
+<td>
+77.027 (df = 4132)
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="8" style="text-align:right">
+@ p &lt; 0.10, @@ p &lt; 0.05, @@@ p &lt; 0.01
+</td>
+</tr>
+</table>
+<br>
