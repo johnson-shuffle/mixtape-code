@@ -73,43 +73,9 @@ Yule (1899)
     # table 10
     stargazer(reg)
 
-    ## 
-    ## % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-    ## % Date and time: Fri, Jul 06, 2018 - 23:40:38
-    ## \begin{table}[!htbp] \centering 
-    ##   \caption{} 
-    ##   \label{} 
-    ## \begin{tabular}{@{\extracolsep{5pt}}lc} 
-    ## \\[-1.8ex]\hline 
-    ## \hline \\[-1.8ex] 
-    ##  & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
-    ## \cline{2-2} 
-    ## \\[-1.8ex] & dpaup \\ 
-    ## \hline \\[-1.8ex] 
-    ##  dout & 0.312$^{***}$ \\ 
-    ##   & (0.019) \\ 
-    ##   & \\ 
-    ##  dold & $-$0.031$^{*}$ \\ 
-    ##   & (0.017) \\ 
-    ##   & \\ 
-    ##  dpop & $-$0.224$^{***}$ \\ 
-    ##   & (0.036) \\ 
-    ##   & \\ 
-    ##  Constant & 81.392$^{***}$ \\ 
-    ##   & (5.084) \\ 
-    ##   & \\ 
-    ## \hline \\[-1.8ex] 
-    ## Observations & 703 \\ 
-    ## R$^{2}$ & 0.302 \\ 
-    ## Adjusted R$^{2}$ & 0.299 \\ 
-    ## Residual Std. Error & 21.519 (df = 699) \\ 
-    ## F Statistic & 100.872$^{***}$ (df = 3; 699) \\ 
-    ## \hline 
-    ## \hline \\[-1.8ex] 
-    ## \textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-    ## \end{tabular} 
-    ## \end{table}
-
+% Table created by stargazer v.5.2 by Marek Hlavac, Harvard University.
+E-mail: hlavac at fas.harvard.edu % Date and time: Fri, Jul 06, 2018 -
+23:48:02
 <br>
 
 Simple difference in means decomposition
@@ -179,6 +145,8 @@ STAR Experiment
       reg,
       #column.labels = labs,
       covariate.labels = vars,
+      dep.var.label = 'Test score',
+      dep.var.label.include = T,
       notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
       notes.append = F,
       star.char = c("@", "@@", "@@@"),
@@ -598,6 +566,46 @@ Residual Std. Error
 <em>Note:</em>
 </td>
 <td colspan="4" style="text-align:right">
+@ p &lt; 0.10, @@ p &lt; 0.05, @@@ p &lt; 0.01
+</td>
+</tr>
+</table>
+<table style="text-align:center">
+<tr>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td>
+Test score
+</td>
+</tr>
+<tr>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+@ p &lt; 0.10, @@ p &lt; 0.05, @@@ p &lt; 0.01
+</td>
+</tr>
+</table>
+<table style="text-align:center">
+<tr>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td>
+TRUE
+</td>
+</tr>
+<tr>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
 @ p &lt; 0.10, @@ p &lt; 0.05, @@@ p &lt; 0.01
 </td>
 </tr>

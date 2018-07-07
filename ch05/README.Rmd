@@ -3,7 +3,7 @@ title: "Potential outcomes causal model"
 date:
 always_allow_html: yes
 output:
-  md_document:
+  html_document:
     toc: true
     toc_depth: 2
 editor_options: 
@@ -26,7 +26,7 @@ library(mixtape)
 
 ## Yule (1899)
 
-```{r yule}
+```{r yule, results = 'asis'}
 
 # get the data
 dat <- yule
@@ -160,6 +160,8 @@ stargazer(
   reg,
   #column.labels = labs,
   covariate.labels = vars,
+  dep.var.labels = 'Test score',
+  dep.var.labels.include = T,
   notes = '@ p < 0.10, @@ p < 0.05, @@@ p < 0.01',
   notes.append = F,
   star.char = c("@", "@@", "@@@"),
