@@ -4,8 +4,7 @@
 ## Overview
 
 This repo provides replication code for the book [“Casual Inference: The
-Mixtape”](http://scunning.com/cunningham_mixtape.pdf) by Scott
-Cunningham.
+Mixtape”](http://scunning.com/stata.html) by Scott Cunningham.
 
 ## Chapters
 
