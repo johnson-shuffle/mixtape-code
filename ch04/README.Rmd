@@ -154,6 +154,7 @@ stargazer(
   type = 'html'
   )
 ```
+<br>
 
 ## Nonrandom sample selection
 

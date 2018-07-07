@@ -90,8 +90,11 @@ dat %<>% mutate(
 
 # model of poverty and public assistance
 reg <- lm(dpaup ~ dout + dold + dpop, data = filter(dat, Type > 1))
-reg
+
+# table 10
+stargazer(reg)
 ```
+<br>
 
 ## Simple difference in means decomposition
 
@@ -147,6 +150,7 @@ reg <- map(mod, ~felm(as.formula(.), data = dat))
 # figure 8
 stargazer::stargazer(reg, type = 'html')
 ```
+<br>
 
 ```{r star_fig11}
 
