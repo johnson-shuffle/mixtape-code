@@ -479,7 +479,7 @@ mod <- 'tscorek ~ sck + rak' %>%
 # regressions
 reg <- map(mod, ~felm(as.formula(.), data = dat))
 
-# figure 8
+# figure 8 (note that column one corresponds to table 13)
 vars <- c(
   'Small class',
   'Regular/aide class',
@@ -1360,7 +1360,7 @@ mod <- 'tscore1 ~ sc1 + ra1' %>%
 # regressions
 reg <- map(mod, ~felm(as.formula(.), data = dat))
 
-# figure 8 (note that column one corresponds to table 13)
+# figure 9
 vars <- c(
   'Small class',
   'Regular/aide class',
