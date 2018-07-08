@@ -130,8 +130,8 @@ dat %<>% mutate(delta = y1 - y0)
 
 # gap function
 gap <- function(data) {
-  tmp <- sample(1:10, 5, replace = F)
-  mean(data$y1[1:10 %in% tmp]) - mean(data$y0[!1:10 %in% tmp])
+  treat <- 1:10 %in% sample(1:10, 5, replace = F)
+  mean(data$y1[treat]) - mean(data$y0[!treat])
 }
 
 # simulate
@@ -198,7 +198,7 @@ mod <- 'tscore1 ~ sc1 + ra1' %>%
 # regressions
 reg <- map(mod, ~felm(as.formula(.), data = dat))
 
-# figure 8
+# figure 8 (note that column one corresponds to table 13)
 vars <- c(
   'Small class',
   'Regular/aide class',
