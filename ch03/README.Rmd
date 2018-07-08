@@ -4,7 +4,7 @@ author:
 date:
 always_allow_html: yes
 output:
-  md_document:
+  github_document:
     toc: true
     toc_depth: 2
 editor_options: 
@@ -22,7 +22,9 @@ knitr::opts_chunk$set(
   warning = F
   )
 load_tidy()
+library(hrbrthemes)
 library(mixtape)
+library(stargazer)
 ```
 
 ## OLS regression line
@@ -55,20 +57,20 @@ all.equal(dat$yhat1, dat$yhat2) & all.equal(dat$uhat1, dat$uhat2)
 # figure 3
 ggplot(dat, aes(x, y)) +
   geom_point(alpha = 0.5) +
-  stat_smooth(method = 'lm', col = 'red') +
+  stat_smooth(method = 'lm', col = ipsum_pal()(1)) +
   labs(title = 'OLS Regression Line') +
-  ggthemes::theme_tufte()
+  theme_ipsum()
 
 # figure 4
 ggplot(dat, aes(yhat1, uhat1)) +
   geom_point(alpha = 0.5) +
   labs(x = 'Fitted Values', y = 'Residuals') +
-  ggthemes::theme_tufte()
+  theme_ipsum()
 ```
 
 ## Algebraic properties of OLS
 
-```{r ols_prop}
+```{r ols_prop, results = 'asis'}
 
 set.seed(1234)
 
@@ -91,28 +93,17 @@ dat %<>% mutate(
   )
 
 # table 6
-# table 6
 out <- rbind(dat, colSums(dat))
 out %<>% cbind(tibble(no = c(1:10, 'Sum')), .)
 names(out) <- c(
   names(out)[1:4],
-  '$\\hat y$',
-  '$\\hat u$',
-  '$\\hat x \\hat u$',
-  '$\\hat y \\hat u$'
+  'hat y',
+  'hat u',
+  'hat x hat u',
+  'hat y hat u'
   )
-
-knitr::kable(
-  out,
-  align = 'c',
-  row.names = F,
-  digits = 1,
-  format = 'html'
-  ) %>%
-  kableExtra::row_spec(11, bold = T) %>%
-  kableExtra::kable_styling()
+stargazer(out, digits = 3, rownames = F, summary = F, type = 'html')
 ```
-<br>
 
 ## Expected value of OLS
 
@@ -135,7 +126,8 @@ beta <- replicate(1E3, ols()) ; skim(beta)
 # figure 5
 ggplot(tibble(x = beta)) +
   geom_histogram(aes(x)) +
-  ggthemes::theme_tufte()
+  labs(x = 'Beta', y = 'Count') +
+  theme_ipsum()
 ```
 
 ## Regression anatomy
@@ -143,7 +135,6 @@ ggplot(tibble(x = beta)) +
 ```{r ols_anatomy}
 
 # auto dataset
-# dat <- read_dta('/Applications/Stata/auto.dta')
 dat <- read_dta('http://www.stata-press.com/data/r8/auto.dta')
 
 # bivariate regression
@@ -179,17 +170,17 @@ s_factor <- coef(reg_b)['length'] * mean(dat$length)
 # figure 6
 ggplot(pdat) +
   geom_point(aes(length, price, colour = type)) +
-  scale_colour_manual(values = c('red', 'green')) +
+  scale_colour_ipsum(name = 'Type') +
   geom_abline(
     intercept = coef(reg_b)['(Intercept)'] + s_factor,
     slope = coef(reg_b)['length'],
-    col = 'red'
-    ) +
+    col = ipsum_pal()(2)[1]
+  ) +
   geom_abline(
     intercept = coef(reg_a2)['(Intercept)'],
     slope = coef(reg_a2)['length_resid'],
-    col = 'green'
-    ) +
+    col = ipsum_pal()(2)[2]
+  ) +
   labs(title = 'Regression Anatomy', x = 'Length', y = 'Price') +
-  ggthemes::theme_tufte()
+  theme_ipsum()
 ```

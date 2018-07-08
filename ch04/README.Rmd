@@ -3,7 +3,7 @@ title: "Directed acyclical graphs"
 date:
 always_allow_html: yes
 output:
-  md_document:
+  github_document:
     toc: true
     toc_depth: 2
 editor_options: 
@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
   warning = F
   )
 load_tidy()
+library(hrbrthemes)
 library(mixtape)
 library(stargazer)
 ```
@@ -34,31 +35,26 @@ library(tidygraph)
 
 # network
 net <- tribble(
-  ~from, ~to,
-  'A', 'o',
-  'A', 'y', 
-  'F', 'd',
-  'F', 'o',
-  'd', 'o',
-  'o', 'y',
+  ~from, ~to, ~lt,
+  'A', 'o', 'u',
+  'A', 'y', 'u',
+  'F', 'd', 'o',
+  'F', 'o', 'u',
+  'd', 'o', 'o',
+  'o', 'y', 'o'
   )
 net %<>% as_tbl_graph(directed = T)
-net %<>% 
-  activate(edges) %>%
-  mutate(
-    lty  = c('u', 'u', 'o', 'u', 'o', 'o')
-    )
 
 # dag
 ggraph(net, layout = 'kk') +
   geom_edge_link(
-    aes(linetype = lty),
+    aes(linetype = lt),
     arrow = arrow(length = unit(2, "mm")),
-    start_cap = circle(3, "mm"), end_cap = circle(3, "mm")
+    start_cap = circle(7, "mm"), end_cap = circle(7, "mm")
   ) + 
   geom_node_point() +
   geom_node_text(
-    aes(label = name), hjust = -1, vjust = 2
+    aes(label = name), hjust = 2, vjust = 1
   ) +
   theme_void() +
   theme(legend.position = 'none')
@@ -104,7 +100,6 @@ stargazer(
   type = 'html'
   )
 ```
-<br>
 
 ## Qualitative change in sign
 
@@ -154,7 +149,6 @@ stargazer(
   type = 'html'
   )
 ```
-<br>
 
 ## Nonrandom sample selection
 
@@ -181,9 +175,9 @@ ggplot(dat) +
   geom_abline(
     intercept = c85,
     slope = -1,
-    col = 'red'
+    col = ipsum_pal()(1)
   ) +
-  scale_shape_manual(name = 'Star?', values = c(1, 16)) +
+  scale_shape_manual(name = 'Is a star?', values = c(1, 16)) +
   labs(x = 'Talent', y = 'Beauty', title = 'Aspiring actors and actresses') +
-  ggthemes::theme_tufte()
+  theme_ipsum()
 ```

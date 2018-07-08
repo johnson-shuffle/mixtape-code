@@ -3,7 +3,7 @@ title: "Potential outcomes causal model"
 date:
 always_allow_html: yes
 output:
-  md_document:
+  github_document:
     toc: true
     toc_depth: 2
 editor_options: 
@@ -21,7 +21,9 @@ knitr::opts_chunk$set(
   warning = F
   )
 load_tidy()
+library(hrbrthemes)
 library(mixtape)
+library(stargazer)
 ```
 
 ## Yule (1899)
@@ -71,7 +73,7 @@ dat %<>%
     dold  = oldratio / lag(oldratio, order_by = year) * 100,
     dout  = outratio / lag(outratio, order_by = year) * 100,
     dpaup = pauper / lag(pauper, order_by = year) * 100
-  )
+    )
 
 # impute dpop (= 0) if only missing 1891
 IDs <- dat %>%
@@ -83,7 +85,7 @@ dat %<>% mutate(
   dpop  = ifelse(is.na(dpop) & year == 1891 & !ID %in% IDs, 0, dpop)
   )
 
-# adjust if change in paupers == Inf
+# adjust if dpaup = Inf
 dat %<>% mutate(
   dpaup = ifelse(dpaup == Inf, NA, dpaup)
   )
@@ -105,7 +107,6 @@ stargazer(
   type = 'html'
   )
 ```
-<br>
 
 ## Simple difference in means decomposition
 
@@ -124,7 +125,7 @@ dat <- tribble(
   8, 5, 6,
   9, 3, 7,
   10, 9, 8
-)
+  )
 dat %<>% mutate(delta = y1 - y0)
 
 # gap function
@@ -178,7 +179,6 @@ stargazer(
   type = 'html'
   )
 ```
-<br>
 
 ```{r star_fig09, results = 'asis'}
 
@@ -219,7 +219,6 @@ stargazer(
   type = 'html'
   )
 ```
-<br>
 
 ```{r star_fig11}
 
@@ -281,4 +280,3 @@ stargazer(
   type = 'html'
   )
 ```
-<br>
