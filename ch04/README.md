@@ -9,34 +9,51 @@ Directed acyclical graphs
 library(ggraph)
 library(tidygraph)
 
-# network
-net <- tribble(
+# edges
+edg <- tribble(
   ~from, ~to, ~lt,
   'A', 'o', 'u',
   'A', 'y', 'u',
   'F', 'd', 'o',
-  'F', 'o', 'u',
-  'd', 'o', 'o',
+  'F', 'o', 'o',
+  'd', 'o', 'u',
+  'd', 'y', 'o',
   'o', 'y', 'o'
   )
-net %<>% as_tbl_graph(directed = T)
+
+# node positions
+pos <- tribble(
+  ~x, ~y,
+  1.0, 0.0,
+  0.0, 1.0,
+  0.6, 1.8,
+  0.0, 0.0,
+  1.0, 1.0,
+  )
+
+# manual layout
+man <- create_layout(
+  graph = as_tbl_graph(edg, directed = T),
+  layout = 'manual',
+  node.positions = pos
+  )
 
 # dag
-ggraph(net, layout = 'kk') +
+ggraph(man) +
   geom_edge_link(
     aes(linetype = lt),
-    arrow = arrow(length = unit(2, "mm")),
-    start_cap = circle(7, "mm"), end_cap = circle(7, "mm")
+    arrow = arrow(length = unit(5, "mm")),
+    start_cap = circle(7, "mm"), end_cap = circle(7, "mm"),
+    width = 1
   ) + 
-  geom_node_point() +
   geom_node_text(
-    aes(label = name), hjust = 2, vjust = 1
+    aes(label = name), hjust = 0.5, vjust = 0.5, size = 10
   ) +
   theme_void() +
   theme(legend.position = 'none')
 ```
 
-![](../fig/gender-1.png)
+![](../fig/gender-1.png)<!-- -->
 
 ``` r
 # construct the data

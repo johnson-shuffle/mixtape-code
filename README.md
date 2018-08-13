@@ -17,7 +17,8 @@ Mixtape”](http://scunning.com/stata.html) by Scott Cunningham.
   - [Potential outcomes causal
     model](https://github.com/johnson-shuffle/mixtape-code/tree/master/ch05)
 
-  - Matching and subclassification
+  - [Matching and
+    subclassification](https://github.com/johnson-shuffle/mixtape-code/tree/master/ch06)
 
   - Regression discontinuity
 
