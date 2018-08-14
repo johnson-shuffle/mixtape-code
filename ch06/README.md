@@ -1,4 +1,4 @@
-Potential outcomes causal model
+Matching and subclassification
 ================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -18,11 +18,14 @@ mean(dat$survived[dat$class == 1]) - mean(dat$survived[dat$class != 1])
 ``` r
 # define strata
 dat %<>%
-  mutate(st = case_when(sex == 0 & age == 1 ~ 'male child',
-                        sex == 0 & age == 0 ~ 'male adult',
-                        sex == 1 & age == 1 ~ 'female child',
-                        sex == 1 & age == 0 ~ 'female adult')
-         )
+  mutate(
+    st = case_when(
+      sex == 0 & age == 1 ~ 'male child',
+      sex == 0 & age == 0 ~ 'male adult',
+      sex == 1 & age == 1 ~ 'female child',
+      sex == 1 & age == 0 ~ 'female adult'
+    )
+  )
 
 # male children
 m_ch_1 <- mean(dat$survived[dat$st == 'male child' & dat$class == 1])
@@ -52,8 +55,11 @@ f_ch_wt <- non_first['female child'] / sum(non_first)
 f_ad_wt <- non_first['female adult'] / sum(non_first)
 
 # weighted effect
-wate <- diff1 * m_ch_wt + diff2 * m_ad_wt + diff3 * f_ch_wt + diff4 * f_ad_wt
+diff1 * m_ch_wt + diff2 * m_ad_wt + diff3 * f_ch_wt + diff4 * f_ad_wt
 ```
+
+    ## male child 
+    ##  0.1887847
 
 ## Exact matching
 
@@ -92,14 +98,14 @@ mean(dat$earnings.x[dat$trainee == 1]) - mean(dat$earnings.y[dat$trainee == 1])
 # construct the data
 dat <- tribble(
   ~unit, ~y, ~y1, ~y0, ~D, ~X,
-  1, 5,  5,  NA, 1, 11,
-  2, 2,  2,  NA, 1, 7,
-  3, 10, 10, NA, 1, 5,
-  4, 6,  6,  NA, 1, 3,
-  5, 4,  NA, 4,  0, 10,
-  6, 0,  NA, 0,  0, 8,
-  7, 5,  NA, 5,  0, 4,
-  8, 1,  NA, 1,  0, 1
+  1, 05, 05, NA, 01, 11,
+  2, 02, 02, NA, 01, 07,
+  3, 10, 10, NA, 01, 05,
+  4, 06, 06, NA, 01, 03,
+  5, 04, NA, 04, 00, 10,
+  6, 00, NA, 00, 00, 08,
+  7, 05, NA, 05, 00, 04,
+  8, 01, NA, 01, 00, 01
   )
 
 # matching
