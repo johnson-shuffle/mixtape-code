@@ -21,7 +21,7 @@ Mixtape”](http://scunning.com/stata.html) by Scott Cunningham.
     subclassification](https://github.com/johnson-shuffle/mixtape-code/tree/master/ch06)
 
   - [Regression
-    discontinuity](https://github.com/johnson-shuffle/mixtape-code/tree/master/ch06)
+    discontinuity](https://github.com/johnson-shuffle/mixtape-code/tree/master/ch07)
 
   - Instrumental variables
 
