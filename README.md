@@ -20,7 +20,8 @@ Mixtape”](http://scunning.com/stata.html) by Scott Cunningham.
   - [Matching and
     subclassification](https://github.com/johnson-shuffle/mixtape-code/tree/master/ch06)
 
-  - Regression discontinuity
+  - [Regression
+    discontinuity](https://github.com/johnson-shuffle/mixtape-code/tree/master/ch06)
 
   - Instrumental variables
 
